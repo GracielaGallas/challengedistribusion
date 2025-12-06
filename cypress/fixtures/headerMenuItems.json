@@ -1,0 +1,22 @@
+[
+  {
+    "text": "Our routes",
+    "urlPath": "/d/" 
+  },
+  {
+    "text": "Groups",
+    "urlPath": "/d/group-bookings" 
+  },
+  {
+    "text": "Fare",
+    "urlPath": "/d/tarifs" 
+  },
+  {
+    "text": "FAQ",
+    "urlPath": "/service" 
+  },
+  {
+    "text": "Contact",
+    "urlPath": "/d/contact" 
+  }
+]

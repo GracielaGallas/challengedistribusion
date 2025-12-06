@@ -1,0 +1,12 @@
+/node_modules
+npm-debug.log*
+.npm
+.nvm
+.yarn
+.pnp.*
+/cypress/screenshots/
+/cypress/videos/
+/cypress/results/
+/cypress/reports/ 
+/build
+/dist

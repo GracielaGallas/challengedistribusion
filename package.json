@@ -1,0 +1,25 @@
+{
+  "name": "challengedistribusion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "clean:screenshots": "node scripts/deleteScreenshots.js",
+    "clean:reports": "rm -rf cypress/results && rm -rf cypress/reports",
+    "report:merge": "npx mochawesome-merge cypress/results/mochawesome/*.json > cypress/results/merged-report.json",
+    "report:generate": "npx marge cypress/results/merged-report.json --reportDir cypress/reports --inline",
+    "test:reports": "npm run clean:reports && npm run cypress:run && npm run report:merge && npm run report:generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^13.17.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-report-generator": "^6.3.2"
+  }
+}
