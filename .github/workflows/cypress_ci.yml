@@ -1,0 +1,42 @@
+name: Cypress E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install System Dependencies for Cypress
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress Tests and Generate Unified Report
+        run: npm run test:reports
+
+      - name: Upload Unified Mochawesome Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report-unified
+          path: cypress/reports/mochawesome.html
+          retention-days: 5
