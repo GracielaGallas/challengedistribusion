@@ -32,6 +32,8 @@ jobs:
         run: npm install
 
       - name: Run Cypress Tests and Generate Unified Report
+        env: 
+          CYPRESS_DEFAULT_COMMAND_TIMEOUT: 10000 
         run: npm run test:reports
 
       - name: Upload Unified Mochawesome Report
