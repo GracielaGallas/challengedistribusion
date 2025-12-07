@@ -111,19 +111,17 @@ class checkoutPage {
 
     captureAndAddExtraItem(aliasName, priceSelector, extraItemName, cleanPrice) {
         
-        // 1. Captura o preço dinâmico e armazena (Lógica de preço mantida como estava)
         cy.get(priceSelector, { timeout: 10000 })
             .should('be.visible')
             .invoke('text')
             .then(priceText => cleanPrice(priceText))
-            .then(price => cy.wrap(price).as(aliasName)); // Armazena o preço no Alias
+            .then(price => cy.wrap(price).as(aliasName)); 
             
-        // 2. INJEÇÃO E CLIQUE: Encontra o item pelo nome e injeta o selector estável
         const stableSelector = `add-${extraItemName.toLowerCase().replace(/\s/g, '-')}-btn`;
         
         return cy.contains(extraItemName)
-            .closest('[data-tag^="extras-card"], .extras__card, .row') // Sobe para o contêiner
-            .find('[data-tag="counter-increase"], .counter-increase') // Encontra o botão '+'
+            .closest('[data-tag^="extras-card"], .extras__card, .row') 
+            .find('[data-tag="counter-increase"], .counter-increase') 
             .first()
             .then($btn => {
                 // Injeta o atributo estável
@@ -131,9 +129,8 @@ class checkoutPage {
                 cy.log(`[INJECTED] Added data-test='${stableSelector}' near '${extraItemName}'`);
             })
             .then(() => {
-                // Clica usando o selector estável injetado
                 cy.get(`[data-test="${stableSelector}"]`).click();
-                return cy.wait(700); // Espera o recálculo
+                return cy.wait(700);
             });
     }
 }
